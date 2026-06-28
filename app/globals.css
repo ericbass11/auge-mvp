@@ -1,0 +1,67 @@
+:root {
+  --fundo: #0e1320;
+  --fundo-elevado: #161d2e;
+  --fundo-cartao: #1c2538;
+  --borda: #2a3650;
+  --texto: #f2f5fb;
+  --texto-suave: #9aa7c2;
+  --texto-fraco: #5e6b86;
+  --energia: #b6f23d;
+  --energia-escura: #8fcb1e;
+  --ouro: #ffc24b;
+  --prata: #c7d0e0;
+  --bronze: #e08a4b;
+  --evolucao: #4bc8ff;
+  --perigo: #ff6b5e;
+
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --num: "Archivo", system-ui, sans-serif;
+  --body: "Barlow Semi Condensed", system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--fundo);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--borda);
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
