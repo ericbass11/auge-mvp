@@ -35,6 +35,7 @@ export default function Gestor() {
         nome={revelacao?.nome}
         premios={campanha.premios}
         premioIndex={revelacao?.premioIndex ?? 0}
+        mecanica={campanha.mecanica}
         onFechar={() => setRevelacao(null)}
       />
 
