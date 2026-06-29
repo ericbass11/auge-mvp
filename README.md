@@ -1,10 +1,7 @@
-# Auge — MVP (esqueleto / FDS 1)
+# Auge — Gamificação de Vendas (versão encorpada)
 
-Gamificação de vendas: **ranking ao vivo** no telão + visão no celular do vendedor,
-com **celebração de conquistas** ao bater meta. Nome de trabalho provisório.
-
-> Este é o esqueleto do primeiro fim de semana de construção. Já roda e é
-> demonstrável. As animações de "revelação" (roleta/baú/raspadinha) entram no FDS 3.
+Ranking de vendas **ao vivo** para telão + visão no **celular** do vendedor, com o
+**momento de revelação** (roleta) ao bater meta. Nome de trabalho provisório.
 
 ## Rodar
 
@@ -15,46 +12,50 @@ npm install
 npm run dev
 ```
 
-Abra http://localhost:3000 e escolha uma das três telas:
+Abra http://localhost:3000 e escolha:
 
-- **/painel** — ranking ao vivo (para o telão / TV)
-- **/gestor** — lançar os números de cada vendedor
-- **/vendedor** — visão do vendedor no celular
+- **/painel** — telão: ranking ao vivo, KPIs, sparklines, streaks, badges, deltas
+- **/gestor** — lançar números; ao cruzar a meta, dispara a roleta de revelação
+- **/vendedor** — celular: posição, tendência, quanto falta p/ ultrapassar, conquistas
+
+> **Para ver a roleta:** na tela do gestor, lance um valor acima da meta de alguém
+> que ainda não bateu (ex.: Bruno, meta R$ 40.000 → lance 45000).
+
+## O que tem agora (versão rica)
+
+- **Painel denso:** KPIs no topo (total vendido animado, % da meta global, quantos
+  bateram), faixa de "maior evolução", e por vendedor: streak 🔥, badges, barra,
+  sparkline de tendência, valor e delta do dia (▲).
+- **Momento "bet":** roleta de revelação animada + confetes ao bater meta.
+- **Vendedor (mobile):** card de posição, tendência pessoal, distância para
+  ultrapassar o próximo, conquistas e ranking geral.
+- **Anti-toxicidade:** destaque de quem mais evoluiu, não só do 1º lugar.
+
+### O "DNA de bet" saudável
+O prêmio é **definido pelo gestor** (mérito: bateu meta = conquistou). A roleta é só
+a *celebração* — a emoção da incerteza fica na animação, não no resultado. Nunca se
+sorteia se a pessoa merece, apenas *como* a conquista é revelada.
 
 ## Modo demonstração
 
-Sem configurar o Supabase, o app roda em **modo demo**: dados em memória, e o que
-você lança na tela do gestor reflete na hora no painel e na tela do vendedor (na
-mesma aba/dispositivo). Ótimo para mostrar a interface.
-
-Para tempo real entre dispositivos diferentes (telão numa TV + celulares),
-configure o Supabase:
-
-1. Crie um projeto em supabase.com
-2. Rode o SQL que está comentado em `lib/dados.js` (cria tabelas + ativa Realtime)
-3. Copie `.env.example` para `.env.local` e preencha as chaves
-4. Reinicie o `npm run dev`
-
-## O que já existe (FDS 1)
-
-- Estrutura Next.js + camada de dados com fallback demo
-- Painel de ranking ao vivo com reordenação animada (Framer Motion)
-- Tela do gestor para lançar valores
-- Tela do vendedor (mobile) com posição e mini-ranking
-- Destaque de "maior evolução" (recurso anti-toxicidade do conceito)
-- Sistema de design (placar de arena: grafite + verde-energia + pódio)
-
-## Próximos passos (conforme a spec do MVP)
-
-- **FDS 2:** Supabase Realtime ligado (telão e celulares sincronizados de verdade)
-- **FDS 3:** animação de revelação ao bater meta (roleta → baú → raspadinha) + confetes
-- **FDS 4:** acabamento, as três mecânicas, polimento para a demo de venda
+Sem Supabase configurado, roda em **modo demo** (dados em memória). O que você lança
+no gestor reflete no painel e no vendedor na mesma sessão. Para tempo real entre
+dispositivos diferentes (telão na TV + celulares), configure o Supabase: rode o SQL
+comentado em `lib/dados.js`, copie `.env.example` para `.env.local` e preencha.
 
 ## Stack
 
-Next.js · Framer Motion (animações) · Supabase (Postgres + Realtime) · CSS puro com
-design tokens. Sem engine de jogo — este é um painel animado em tempo real, e a
-stack web dá conta com folga.
+Next.js · Framer Motion (animações, roleta, contadores) · SVG/Canvas · Supabase
+(Postgres + Realtime). Sem engine de jogo — é um painel animado em tempo real.
+
+## Estrutura
+
+```
+app/         layout, home, /painel, /gestor, /vendedor, estilos globais
+components/  Visuais (sparkline, badge, contador, confetes), Revelacao (roleta)
+config/      tema.js — design tokens + dados demo (vendedores, badges, prêmios)
+lib/         dados.js — camada de dados (demo + Supabase + Realtime)
+```
 
 ---
 *Eric Souza — Consultoria em Tecnologia e Inteligência Artificial.*
